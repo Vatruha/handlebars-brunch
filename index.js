@@ -63,9 +63,9 @@ class HandlebarsCompiler {
 
   compileStatic(file) {
     try {
-			const source = `export default Handlebars.template(${handlebars.precompile(file.data)});`
+      const source = `export default Handlebars.template(${handlebars.precompile(file.data)});`
 
-			return Promise.resolve(source);
+      return Promise.resolve(source);
     } catch (error) {
       return Promise.reject(error);
     }
