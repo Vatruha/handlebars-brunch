@@ -63,10 +63,9 @@ class HandlebarsCompiler {
 
   compileStatic(file) {
     try {
-      const template = handlebars.compile(file.data);
-      const source = template(this.locals);
+			const source = `export default Handlebars.template(${handlebars.precompile(file.data)});`
 
-      return Promise.resolve(source);
+			return Promise.resolve(source);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -76,6 +75,6 @@ class HandlebarsCompiler {
 HandlebarsCompiler.prototype.brunchPlugin = true;
 HandlebarsCompiler.prototype.type = 'template';
 HandlebarsCompiler.prototype.pattern = /\.(hbs|handlebars)$/;
-HandlebarsCompiler.prototype.staticTargetExtension = 'html';
+HandlebarsCompiler.prototype.staticTargetExtension = 'js';
 
 module.exports = HandlebarsCompiler;
